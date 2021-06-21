@@ -3,10 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'firebase/firestore';
+import {FirebaseAppProvider} from 'reactfire';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAyWX3QiMi67bVysbE5yUrO84In6B3_r8s",
+  authDomain: "reactnewsfeed-473b6.firebaseapp.com",
+  projectId: "reactnewsfeed-473b6",
+  storageBucket: "reactnewsfeed-473b6.appspot.com",
+  messagingSenderId: "1022484293898",
+  appId: "1:1022484293898:web:4b65c03950b55df17532f3",
+  measurementId: "G-LY35HS0P1P"
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FirebaseAppProvider  firebaseConfig={firebaseConfig}>
+      <App />
+    </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
