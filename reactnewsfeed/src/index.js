@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'firebase/firestore';
-import {FirebaseAppProvider} from 'reactfire';
 
+import 'firebase/firestore';
+import 'firebase/auth';
+import { FirebaseAppProvider } from 'reactfire';;
 
 const firebaseConfig = {
   apiKey: "AIzaSyAyWX3QiMi67bVysbE5yUrO84In6B3_r8s",
