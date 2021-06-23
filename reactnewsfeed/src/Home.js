@@ -2,10 +2,13 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { NavigationBar } from './components/NavigationBar';
+import { NavigationBar2 } from './components/NavigationBar2';
 import './Home.css'
 import { Feed } from './Feed';
-import { useFirestoreDocData, useFirestore, useFirestoreCollectionData, useAuth, useUser } from 'reactfire';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useFirestoreDocData, useFirestore, useFirestoreCollectionData, useAuth, useUser, auth} from 'reactfire';
+import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 const Styles = styled.div`
@@ -18,51 +21,64 @@ const Styles = styled.div`
     font-size: calc(10px + 2vmin);
     color: white;
 `;
-
-
+/*auth.onAuthStateChanged((user) => {
+    if (user) {
+        <NavigationBar2/>
+    } else {
+        <NavigationBar/>
+    }
+  });*/
 //export const Home = () => (
 export function Home(){
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const auth = useAuth();
+      
 
     function registrar() {
-        auth.createUserWithEmailAndPassword(email, password);
+        auth.createUserWithEmailAndPassword(email, password).catch(err => console.log(err));
     };
 
     console.log(email);
     console.log(password);
-    
+    const { data: user } = useUser();
+    const history = useHistory();
+    function handleClick(path) {
+        history.push(path);
+    }
     function ingresar() {
-        auth.signInWithEmailAndPassword(email, password).catch(err => console.log(err));
-        if(auth.currentUser=email){
-            
-        };
+        auth.signInWithEmailAndPassword(email, password).then(() => handleClick("/Feed")).catch(err => console.log(err));
+    //    var user = auth.currentUser;
     };
-
     return(
     <Styles>
         <div>
+            <NavigationBar/>
             <Form>
+                <h1>
+                x
+
+                </h1>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label></Form.Label>
                     <Form.Control type="email" placeholder="Ingrese email"  value={email} onChange={e => setEmail(e.target.value)}/>
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Contraseña</Form.Label>
                     <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)}/>
                 </Form.Group>
-                
-                <Button onClick={ingresar}>
-                    Ingresar
-                </Button>
+               
+                    <Button onClick={ingresar} >
+                        Ingresar
+                    </Button>
+ 
                 <h1>
                 </h1>
                 <Button onClick={registrar}>
                     ¡Registrate!
                 </Button>
             </Form>
+            
         </div>
     </Styles>
     );    
