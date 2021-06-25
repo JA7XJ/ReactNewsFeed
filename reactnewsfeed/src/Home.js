@@ -75,7 +75,7 @@ export function Home(){
                 <h1>
                 </h1>
                 <Button onClick={registrar}>
-                    ¡Registrate!
+                    Registrar
                 </Button>
             </Form>
             

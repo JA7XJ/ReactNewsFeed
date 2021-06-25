@@ -32,7 +32,6 @@ export function Feed(){
                 <Form.Group controlId="formBasicPassword">
                     <Form.Control as="textarea" rows={3} placeholder="Post" />
                 </Form.Group>
-
                 <Button>
                     publicar
                 </Button>
